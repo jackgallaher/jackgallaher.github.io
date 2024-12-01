@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кликер</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #target {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            cursor: pointer;
+        }
+        #score {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Споймай меня!</h1>
+    <p>Кликни на меня, чтобы набрать очки!</p>
+    <div id="target">
+        <img src="2.png">
+    </div>
+    <p id="score">Очки: 0</p>
+    <button onclick="startGame()">Начать игру</button>
+
+    <script>
+        let score = 0;
+        const target = document.getElementById('target');
+        const scoreDisplay = document.getElementById('score');
+
+        function randomPosition() {
+            const x = Math.random() * (window.innerWidth - 50);
+            const y = Math.random() * (window.innerHeight - 50);
+            target.style.left = `${x}px`;
+            target.style.top = `${y}px`;
+        }
+
+        target.addEventListener('click', () => {
+            score++;
+            scoreDisplay.innerText = `Очки: ${score}`;
+            randomPosition();
+        });
+
+        function startGame() {
+            score = 0;
+            scoreDisplay.innerText = `Очки: ${score}`;
+            randomPosition();
+            setInterval(randomPosition, 1000); // Перемещаем квадрат каждые 1 секунду
+        }
+
+        // Начальное положение квадрата
+        randomPosition();
+    </script>
+</body>
+</html>
